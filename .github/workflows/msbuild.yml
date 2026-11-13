@@ -27,3 +27,12 @@ jobs:
       - name: Test launcher lifecycle with mock processes
         shell: pwsh
         run: .\Tests\run.ps1 -Platform ${{ matrix.platform }} -Configuration ${{ matrix.configuration }}
+
+      - name: Upload executable
+        if: matrix.platform == 'x64' && matrix.configuration == 'Release'
+        uses: actions/upload-artifact@v4
+        with:
+          name: Battlenet-Launcher-x64
+          path: x64/Release/Battlenet-Launcher.exe
+          if-no-files-found: error
+  
