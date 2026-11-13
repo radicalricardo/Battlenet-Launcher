@@ -158,11 +158,11 @@ void ClientLogMonitor::Cursor::Consume(std::string_view svBytes, std::string_vie
 			}
 			else if (strPartialLine.contains("[GameController] {Main} Beginning GameController initialization"))
 			{
-				bGamesReady = true;
+    			bGamesReady = false;
 			}
 			else if (strPartialLine.contains("[GameController] {Main} GameController initialization complete"))
 			{
-				bGamesReady = bLoggedIn;
+    			bGamesReady = true;
 			}
 			else if (strPartialLine.contains("[GameProvider] {Main} Game provider is no longer initialized and is now reset"))
 			{
