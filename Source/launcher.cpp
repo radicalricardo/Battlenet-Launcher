@@ -646,7 +646,7 @@ int Run(const Options& stOptions, const fs::path& pathLogDirectory)
 	const auto ullCreatedSince = Now();
 	OwnedClient stOwnedClient{!bWasRunning && !stOptions.bKeepClient, ullCreatedSince, strClientDirectory, {}};
 	auto tpDeadline = Clock::now() + stOptions.secTimeout;
-	auto hBootstrap = Start(stOptions.strClientPath, L"");
+	auto hBootstrap = Start(stOptions.strClientPath, L"--autostarted");
 	Log(L"Watching new Battle.net session logs in: " + pathLogs.native());
 	Log(L"Waiting for Battle.net login. Complete any login prompt in the client.");
 	ClientLogState ePreviousState = ClientLogState::WaitingForLog;
