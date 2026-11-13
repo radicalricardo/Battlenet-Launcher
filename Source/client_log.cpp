@@ -155,11 +155,10 @@ void ClientLogMonitor::Cursor::Consume(std::string_view svBytes, std::string_vie
 			if (strPartialLine.contains("[BNLogin] {Main} Logged into Battle.net successfully."))
 			{
 				bLoggedIn = true;
-				bGamesReady = false;
 			}
 			else if (strPartialLine.contains("[GameController] {Main} Beginning GameController initialization"))
 			{
-				bGamesReady = false;
+				bGamesReady = true;
 			}
 			else if (strPartialLine.contains("[GameController] {Main} GameController initialization complete"))
 			{
@@ -235,7 +234,7 @@ ClientLogState ClientLogMonitor::Poll()
 		{
 			eState = std::max(eState, ClientLogState::WaitingForGames);
 		}
-		if (stCursor.bGamesReady && stCursor.ullOffset == ullSize)
+		if (stCursor.bLoggedIn && stCursor.bGamesReady && stCursor.ullOffset == ullSize)
 		{
 			eState = ClientLogState::Ready;
 		}
